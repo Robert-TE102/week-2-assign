@@ -37,7 +37,7 @@ function createThumbnails() {
 
     thumbImg.setAttribute("src", image.image);
     thumbImg.setAttribute("alt", image.alt);
-    thumbImg.setAttribute("tabindex", "1");
+    thumbImg.setAttribute("tabindex", "0");
     thumbImg.classList.add("thumb-image");
     thumbContainer.appendChild(thumbImg);
     thumbImg.addEventListener("click", function () {
@@ -76,22 +76,19 @@ function updateScrollBar(currentImage) {
   }
 }
 
-function updateDisplayImage(images) {
+function updateDisplayImage(image) {
   let currentDisplayImage = displayElem.firstChild;
 
   if (!currentDisplayImage) {
     currentDisplayImage = document.createElement("img");
     displayElem.appendChild(currentDisplayImage);
   }
-  displayElem.innerHTML = "";
-  currentDisplayImage = document.createElement("img");
-  currentDisplayImage.setAttribute("src", images[0].images);
-  currentDisplayImage.setAttribute("alt", images[0].alt);
-  updateScrollBar(images);
-  document.getElementById("announcer").textContent = images.alt;
-}
 
-updateDisplayImage(images);
+  currentDisplayImage.setAttribute("src", image.image);
+  currentDisplayImage.setAttribute("alt", image.alt);
+  updateScrollBar(image);
+  document.getElementById("announcer").textContent = image.alt;
+}
 
 next.addEventListener("click", function () {
   selectNextImage(1);
@@ -120,4 +117,41 @@ function selectNextImage(index) {
   if (currentImageIndex < 0) currentImageIndex = images.length - 1;
   console.log(currentImageIndex);
   updateDisplayImage(images[currentImageIndex]);
+}
+
+window.onload = init;
+
+let touchstartX = 0;
+let touchendX = 0;
+
+function handleGesture() {
+  let threshold = 50;
+  if (touchendX < touchstartX - threshold) {
+    console.log("swipedright");
+    selectNextImage(1);
+  }
+
+  if (touchendX > touchstartX + threshold) {
+    console.log("swiped left");
+    selectNextImage(-1);
+  }
+}
+
+displayElem.addEventListener("touchstart", (e) => {
+  touchstartX = e.changedTouches[0].screenX;
+});
+
+displayElem.addEventListener("touchend", (e) => {
+  touchendX = e.changedTouches[0].screenX;
+  handleGesture();
+});
+
+window.addEventListener("keydown", handleArrowKeyPress);
+
+function handleArrowKeyPress(event) {
+  if (event.key === "ArrowRight") {
+    selectNextImage(1);
+  } else if (event.key === "ArrowLeft") {
+    selectNextImage(-1);
+  }
 }
