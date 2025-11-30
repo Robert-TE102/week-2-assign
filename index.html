@@ -3,7 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Dolphin Slideshow</title>
+    <script src="apps.js" defer></script>
+  <body>
+    <div id= "thumb-container" class= "thumb-container">
+    <img src= "Images/adam-berkecz-K6kZKJOmZrk-unsplash.jpg" alt= "Dolphin Smiling in Water." tabindex="0" class="thumb-image">
+    <img src= "Images/joseph-ndungu-DKPtbX1T7Fc-unsplash.jpg" alt= "Dolphin on the edge of a pool." tabindex="0" class="thumb-image">
+    <img src= "Images/pagie-page-UaaHbkk40Ow-unsplash.jpg" alt= "Dolphin jumping in the air out of the sea." tabindex="0" class="thumb-image">
+    <img src="Images/ranae-smith-fgKEqVzX5zM-unsplash.jpg" alt="2 Dolphins hugging and smiling." tabindex="0" class="thumb-image">
+  </div>
+    <button class="thumb-container thumbContainerHideButton" id="thumbContainerHideButton" aria-label="Close the image gallery"
+    </button>
+        <div id="display"><img src="Images/adam-berkecz-K6kZKJOmZrk-unsplash.jpg" alt= "Dolphin Smiling in Water."</div>
+    <button id="next" aria-label="Go to the next image">&gt;</button>
+    <button id="prev" aria-label="Go to the previous image">&lt;</button>
+    <div id="announcer" aria-live="polite" class="visually-hidden">Smiling Dolphin in the sea.</div>
+</body>
+</head>
 </html>
